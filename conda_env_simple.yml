@@ -1,0 +1,12 @@
+name: test_nanoclust
+channels:
+  - conda-forge
+  - bioconda
+  - r
+  - defaults
+dependencies:
+  - nextflow==21.10.6
+  - ca-certificates
+  - openssl
+  - canu
+prefix: /home/bartmans/.miniconda3/envs/test_nanoclust

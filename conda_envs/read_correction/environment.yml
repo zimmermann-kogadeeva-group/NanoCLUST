@@ -1,4 +1,4 @@
-name: read_correction-
+name: read_correction
 channels:
   - conda-forge
   - bioconda
