@@ -3,7 +3,7 @@ SHELL = /bin/bash
 ENV_NAME = test_nanoclust
 
 REMOTE = embl
-REMOTE_DIR = /g/mazimmer/bartmans/Projects/NanoCLUST/
+REMOTE_DIR = /g/mazimmer/bartmans/Projects/TestNanoCLUST/
 SYNC_FLAGS = -av
 SYNC = rsync
 
