@@ -7,11 +7,11 @@ REMOTE_DIR = /g/mazimmer/bartmans/Projects/TestNanoCLUST/
 SYNC_FLAGS = -av
 SYNC = rsync
 
-.PHONY: pull_% push_% pull push git_update install_precommit
-
 ifeq (,$(findstring cluster.embl.de,${HOSTNAME}))
 	REMOTE_DIR := ${REMOTE}:${REMOTE_DIR}
 endif
+
+.PHONY: pull_% push_% pull push git_update install_precommit
 
 pull_%:
 	${SYNC} ${SYNC_FLAGS} ${REMOTE_DIR}$* ./
