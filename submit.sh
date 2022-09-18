@@ -11,11 +11,11 @@ conda activate test_nanoclust
 module load canu FastQC Java/1.8.0_112
 
 data_dir="data/20220909_1017_X1_FAT84254_e5238139/fastq_pass/"
-output_dir="output/20220909_1017_X1_FAT84254_e5238139/"
+output_dir="output/20220909_1017_X1_FAT84254_e5238139_full/"
 
 for f in $(find ${data_dir}  -name "*.fastq.gz"); do 
-    nextflow run main.nf -profile conda \
+    nextflow run main.nf -profile conda --polishing_reads 7000 \
         --reads "${f}" --db 'db/16S_ribosomal_RNA' --tax "db/taxdb" \
-        --outdir "${output_dir}$(basename ${f} | tr -d '.fastq.gz')"
+        --outdir "${output_dir}$(basename ${f} | sed -e 's/\.fastq\.gz//')"
 done
 
