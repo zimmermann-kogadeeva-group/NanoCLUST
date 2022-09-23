@@ -1,4 +1,5 @@
 .nextflow*
+.ipynb_checkpoints/
 work/
 data/
 output/
@@ -13,3 +14,4 @@ tests/test_data
 *.fasta
 *.fastq
 notes.md
+slurm*.out
