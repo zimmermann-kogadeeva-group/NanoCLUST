@@ -5,7 +5,7 @@
 #SBATCH -N1
 #SBATCH -c16
 
-eval "$(/home/bartmans/.miniconda3/bin/conda shell.bash hook)"
+eval "$(conda shell.bash hook)"
 conda activate test_nanoclust
 
 module load canu FastQC Java/1.8.0_112
