@@ -4,5 +4,5 @@ channels:
   - bioconda
   - defaults
 dependencies:
-  - canu =2.0
+  - canu =2.2
 
