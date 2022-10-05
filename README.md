@@ -1,5 +1,7 @@
 # NanoCLUST
 
+**Fork of NanoCLUST pipeline available [here](https://github.com/genomicsITER/NanoCLUST)**
+
 **De novo clustering and consensus building for ONT 16S sequencing data**.
 
 ## Introduction
