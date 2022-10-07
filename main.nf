@@ -307,7 +307,7 @@ if(params.multiqc){
  }
 
  process read_correction {
-     publishDir "${params.outdir}/canu", mode: 'copy', pattern: 'corrected_reads.correctedReads.fasta'
+     publishDir "${params.outdir}/canu_${cluster_log.baseName}", mode: 'copy', pattern: 'corrected_reads.correctedReads.fasta'
      memory { 7.GB * task.attempt }
      time { 1.hour * task.attempt }
      errorStrategy { task.exitStatus in 137..140 ? 'retry' : 'terminate' }
