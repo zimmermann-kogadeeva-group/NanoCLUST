@@ -2,6 +2,7 @@
 .ipynb_checkpoints/
 work/
 data/
+db/
 output/
 results*/
 .DS_Store

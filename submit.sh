@@ -8,8 +8,11 @@
 eval "$(conda shell.bash hook)"
 conda activate test_nanoclust
 
-data_dir="data/20220909_1017_X1_FAT84254_e5238139/fastq_pass/"
-output_dir="output/20220909_1017_X1_FAT84254_e5238139/"
+data_dir="${1}/"
+output_dir="${2:-output/test/}"
+
+echo "Data dir: ${data_dir}" 
+echo "Output dir: ${output_dir}"
 
 for f in ${data_dir}*.fastq.gz; do 
     echo ${f}

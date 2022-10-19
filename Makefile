@@ -13,6 +13,12 @@ endif
 
 .PHONY: pull_% push_% pull push git_update install_precommit
 
+db:
+	mkdir -p db/taxdb
+	wget https://ftp.ncbi.nlm.nih.gov/blast/db/16S_ribosomal_RNA.tar.gz && tar -xzvf 16S_ribosomal_RNA.tar.gz -C db
+	wget https://ftp.ncbi.nlm.nih.gov/blast/db/taxdb.tar.gz && tar -xzvf taxdb.tar.gz -C db/taxdb
+	rm 16S_ribosomal_RNA.tar.gz taxdb.tar.gz
+
 pull_%:
 	${SYNC} ${SYNC_FLAGS} ${REMOTE_DIR}$* ./
 
