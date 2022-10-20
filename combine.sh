@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-input_dir="output/20220909_1017_X1_FAT84254_e5238139_full2/"
-output_file="output/combined_full2.csv"
+input_dir="${1}"
+output_file="${2:-test.csv}"
 
 echo "sample,tax,taxid,rel_abundance" > ${output_file}
 
