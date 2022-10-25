@@ -1,6 +1,5 @@
 .nextflow*
 .ipynb_checkpoints/
-work/
 data/
 output/
 results*/
