@@ -1,6 +1,6 @@
 
 SHELL = /bin/bash
-ENV_NAME = test_nanoclust
+ENV_NAME = nanoclust
 
 REMOTE = embl
 REMOTE_DIR = /g/mazimmer/bartmans/Projects/TestNanoCLUST/
