@@ -1,27 +1,27 @@
 
 SHELL = /bin/bash
+
+SHELL = /bin/bash
 ENV_NAME = nanoclust
+ACTIVATE = eval "$$(conda shell.bash hook)" && conda activate ${ENV_NAME}
 
 REMOTE = embl
 REMOTE_DIR = /g/mazimmer/bartmans/Projects/TestNanoCLUST/
 SYNC_FLAGS = -av
 SYNC = rsync
 
-ifeq (,$(findstring cluster.embl.de,${HOSTNAME}))
-	REMOTE_DIR := ${REMOTE}:${REMOTE_DIR}
+ifneq (,$(wildcard .exclude))
+    SYNC_FLAGS += --exclude-from .exclude
 endif
 
-.PHONY: pull_% push_% pull push git_update install_precommit
+ifeq (,$(findstring cluster.embl.de,${HOSTNAME}))
+    REMOTE_DIR := ${REMOTE}:${REMOTE_DIR}
+endif
 
-DB_URL = https://ftp.ncbi.nlm.nih.gov/blast/db/16S_ribosomal_RNA.tar.gz
-TAXDB_URL = https://ftp.ncbi.nlm.nih.gov/blast/db/taxdb.tar.gz
+.PHONY: pull_% push_% test_% install_precommit \
+		conda_env.yml conda_env_simple.yml
 
-db/taxdb:
-	mkdir -p db/taxdb && wget ${TAXDB_URL} && \
-	tar -xzvf taxdb.tar.gz -C db/taxdb && rm taxdb.tar.gz
-db: db/taxdb
-	wget ${DB_URL} && tar -xzvf 16S_ribosomal_RNA.tar.gz -C db && \
-	rm 16S_ribosomal_RNA.tar.gz 
+all: conda_env.yml conda_env_simple.yml
 
 pull_%:
 	${SYNC} ${SYNC_FLAGS} ${REMOTE_DIR}$* ./
@@ -30,21 +30,10 @@ push_%: SYNC_FLAGS += --delete
 push_%:
 	${SYNC} ${SYNC_FLAGS} ./$* ${REMOTE_DIR}
 
-pull: pull_data pull_output pull_notes.md
-pull:
-	echo $^
-
-push: push_data push_output push_notes.md
-push:
-	echo $^
-
 test_%: SYNC_FLAGS += -n
 test_%: %
-	echo $@
+	echo $^ 
 
-git_update:
-	cd ${REMOTE_DIR} && git pull
-		    
 conda_env.yml:
 	conda env export -n ${ENV_NAME} -f $@
 
@@ -56,4 +45,16 @@ conda_env_simple.yml: conda_env.yml
 	ln -s ../../.pre-commit $@
 
 install_precommit: .git/hooks/pre-commit
+
+# Data
+
+DB_URL = https://ftp.ncbi.nlm.nih.gov/blast/db/16S_ribosomal_RNA.tar.gz
+TAXDB_URL = https://ftp.ncbi.nlm.nih.gov/blast/db/taxdb.tar.gz
+
+db/taxdb:
+	mkdir -p db/taxdb && wget ${TAXDB_URL} && \
+	tar -xzvf taxdb.tar.gz -C db/taxdb && rm taxdb.tar.gz
+db: db/taxdb
+	wget ${DB_URL} && tar -xzvf 16S_ribosomal_RNA.tar.gz -C db && \
+	rm 16S_ribosomal_RNA.tar.gz 
 
