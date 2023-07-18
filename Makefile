@@ -18,20 +18,20 @@ ifeq (,$(findstring cluster.embl.de,${HOSTNAME}))
     REMOTE_DIR := ${REMOTE}:${REMOTE_DIR}
 endif
 
-.PHONY: pull_% push_% test_% install_precommit \
+.PHONY: pull push %_test install_precommit \
 		conda_env.yml conda_env_simple.yml
 
 all: conda_env.yml conda_env_simple.yml
 
-pull_%:
-	${SYNC} ${SYNC_FLAGS} ${REMOTE_DIR}$* ./
+pull:
+	${SYNC} ${SYNC_FLAGS} ${REMOTE_DIR}/ ./
 
-push_%: SYNC_FLAGS += --delete
-push_%:
-	${SYNC} ${SYNC_FLAGS} ./$* ${REMOTE_DIR}
+push: SYNC_FLAGS += --delete
+push:
+	${SYNC} ${SYNC_FLAGS} ./ ${REMOTE_DIR}/
 
-test_%: SYNC_FLAGS += -n
-test_%: %
+%_test: SYNC_FLAGS += -n
+%_test: %
 	echo $^ 
 
 conda_env.yml:
