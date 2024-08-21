@@ -4,6 +4,7 @@ channels:
   - bioconda
 dependencies:
   - pandas =1.1.1
+  - numpy = 1.19.1
   - matplotlib-base =3.3.1
   - datashader =0.11.1
   - holoviews =1.13.3
