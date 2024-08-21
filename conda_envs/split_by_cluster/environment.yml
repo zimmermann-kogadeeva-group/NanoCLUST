@@ -2,6 +2,5 @@ name: split_by_cluster
 channels:
   - conda-forge
   - bioconda
-  - defaults
 dependencies:
   - seqtk =1.3
