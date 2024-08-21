@@ -10,7 +10,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
 
 ## Quick Start
 
-i. Install [`nextflow`](https://nf-co.re/usage/installation). Version must be `22`, tested with `21.10.6`
+i. Install [`nextflow`](https://nf-co.re/usage/installation). Version must be below `22`, tested with `21.10.6`
 
 ii. Install [`docker`](https://docs.docker.com/engine/installation/) or [`conda`](https://conda.io/miniconda.html)
 
