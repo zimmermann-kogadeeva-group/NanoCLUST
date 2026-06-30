@@ -6,7 +6,7 @@
 #SBATCH -c16
 
 eval "$(conda shell.bash hook)"
-conda activate test_nanoclust
+conda activate .envs/nextflow
 
 data_dir="${1}/"
 output_dir="${2:-output/test/}"
@@ -16,9 +16,14 @@ echo "Output dir: ${output_dir}"
 
 for f in ${data_dir}*.fastq.gz; do 
     echo ${f}
-    nextflow run main.nf -profile conda \
-        --umap_set_size 130000 --cluster_sel_epsilon 0.25 --min_cluster_size 50 \
-        --reads "${f}" --db "db/16S_ribosomal_RNA" --tax "db/taxdb" \
+    nextflow run -resume main.nf \
+        -profile conda \
+        --umap_set_size 130000 \
+        --cluster_sel_epsilon 0.25 \
+        --min_cluster_size 50 \
+        --reads "${f}" \
+        --db "db/16S_ribosomal_RNA" \
+        --tax "db/taxdb" \
         --outdir "${output_dir}$(basename ${f} | sed -e 's/\.fastq\.gz//')"
 done
 

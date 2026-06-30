@@ -4,3 +4,5 @@ channels:
   - bioconda
 dependencies:
   - medaka==1.11.3
+  - setuptools==80.10.2
+  - python==3.10

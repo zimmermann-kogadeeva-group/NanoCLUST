@@ -169,7 +169,7 @@ def print_comp_vectors(read_num, target_range, comp_vectors, read_id, lengths_d)
 
         # if read_num%1000==0: print("writing...",target_range, read_num)
         comp_vec_str = "\t".join( map(lambda x: str(round(x,4)), comp_vectors[read_id]))
-        print("%s\t%i\t%s" % (read_id.split(" ")[0], lengths_d[read_id], comp_vec_str))
+        print("%s\t%i\t%s" % (read_id.split()[0], lengths_d[read_id], comp_vec_str))
     elif read_num>target_range[1]:
         status = "over"
     return status
