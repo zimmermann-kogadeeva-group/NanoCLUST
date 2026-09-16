@@ -5,37 +5,17 @@
 #SBATCH -N1
 #SBATCH -c16
 
-if [ ! -f conda_env_simple.yml ]; then
-    wget https://git.embl.org/grp-zimmermann-kogadeeva/NanoCLUST/-/raw/master/conda_env_simple.yml -O conda_env_simple.yml
-fi
-
-# Create the conda env with old version of nextflow
-if [ ! -d .envs/nextflow ]; then
-    conda env create -p ./.envs/nextflow -f conda_env_simple.yml
-fi
-
-# Activate the conda env created above
-eval "$(conda shell.bash hook)"
-conda activate .envs/nextflow
-
 data_dir="${1}/"
-output_dir="${2:-Output}"
+output_dir="${2:-output}"
 
 echo "Data dir: ${data_dir}" 
 echo "Output dir: ${output_dir}"
 
-pipeline_loc="main.nf"
-if [ ! -f main.nf ]; then
-    if [ ! -d NanoCLUST ]; then
-        git clone https://git.embl.org/grp-zimmermann-kogadeeva/NanoCLUST.git
-    fi
-    pipeline_loc="NanoCLUST/main.nf"
-fi
-
 for f in ${data_dir}*.fastq.gz; do 
     echo ${f}
+    pixi run \
     nextflow run -resume \
-        ${pipeline_loc} \
+	main.nf \
         -profile conda \
         --umap_set_size 130000 \
         --cluster_sel_epsilon 0.25 \

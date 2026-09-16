@@ -1,6 +1,0 @@
-name: nanoclust
-channels:
-  - conda-forge
-  - bioconda
-dependencies:
-  - nextflow==21.10.6

@@ -10,6 +10,22 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
 
 ## Quick Start
 
+Simple way:
+```
+pixi run \
+    nextflow run -resume main.nf \
+    -profile conda \
+    --umap_set_size 130000 \
+    --cluster_sel_epsilon 0.25 \
+    --min_cluster_size 50 \
+    --db db/16S_ribosomal_RNA \
+    --tax db/taxdb \
+    --reads <path_to_sample> \
+    --outdir output/
+```
+
+Other way:
+
 i. Install [`nextflow`](https://nf-co.re/usage/installation). Version must be below `22`, tested with `21.10.6`
 
 ii. Install [`docker`](https://docs.docker.com/engine/installation/) or [`conda`](https://conda.io/miniconda.html)

@@ -14,3 +14,6 @@ tests/test_data
 *.fastq
 notes.md
 slurm*.out
+# pixi environments
+.pixi/*
+!.pixi/config.toml
